@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('partials/head', {title: 'home'}) %>
+  <body>
+    <%- include('partials/nav', {navtitle: 'Fran'}) %>
+<body>
+
+
+    <% if (locals.errors) { %>
+        <% for(let oneError in errors) { %>
+            <p>
+                <%= errors[oneError].msg %>
+            </p>
+        <% } %>
+    <% } %>
+
+
+    <form action="/ingress" method="post">
+        <label for="name">Ingrese su nombre</label>
+        <input type="text" name="name" value="<%= locals.oldData && oldData.name ? oldData.name : "" %>
+        ">
+    
+        <select name="colors" id="colors">Seleccione
+            <option value="" id="colors" selected></option>
+            <option value="Azul" id="colors" <%= locals.oldData && oldData.colors == 'Azul' ? 'selected' : null %>
+                >Azul</option>
+            <option value="Amarillo" id="colors" <%= locals.oldData && oldData.colors == 'Amarillo' ? 'selected' : null %>
+                >Amarillo</option>
+            <option value="Verde" id="colors" <%= locals.oldData && oldData.colors == 'Verde' ? 'selected' : null %>
+                >Verde</option>
+        </select>
+
+        <label for="email">Ingrese su email</label>
+        <input type="email" name="email" value="<%= locals.oldData && oldData.email ? oldData.email : "" %>
+        ">
+
+        <label for="age">“Ingrese su edad</label>
+        <input type="text" name="age" value="<%= locals.oldData && oldData.age ? oldData.age : "" %>">
+
+        <input type="submit" value="Ingresar">
+
+    </form>
+
+    <% if(locals.data) { %>
+
+            <p>
+                Hola <%= data.name %>, elegiste el color: <%= data.colors %>,
+                 tu email es:
+                 <%= data.email %> y tu edad es:  <%= data.age %>                 
+            </p>
+
+            <% } %>
+
+</body>
+
+</html>
